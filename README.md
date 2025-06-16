@@ -5,7 +5,7 @@ API REST desenvolvida em Node.js com NestJS para encurtamento de URLs.
 ## Funcionalidades implementadas
 
 - **Cadastro de usuários:** Endpoint `POST /users` para registrar novos usuários.
-- **Encurtamento de URL:** Endpoint `POST /urls` que permite que usuários enviem uma URL longa para receber uma versão encurtada.
+- **Encurtamento de URL:** Endpoint `POST /url` que permite que usuários enviem uma URL longa para receber uma versão encurtada.
 - **Redirecionamento:** Endpoint `GET /:shortCode` que redireciona para a URL original e contabiliza o clique.
 
 **Nota:** As funcionalidades de autenticação, listagem, edição e exclusão de URLs por usuário autenticado foram planejadas mas não implementadas. A estrutura de autenticação (decorator `GetUser`) e os relacionamentos no banco de dados estão prontos para recebê-las.
