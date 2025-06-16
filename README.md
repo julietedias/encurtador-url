@@ -1,16 +1,16 @@
 # Encurtador de URLs - API
 
-API RESTful desenvolvida em Node.js com NestJS para encurtamento de URLs, como parte de um teste de habilidade técnica.
+API REST desenvolvida em Node.js com NestJS para encurtamento de URLs.
 
-## Funcionalidades Implementadas
+## Funcionalidades implementadas
 
-- **Cadastro de Usuários:** Endpoint `POST /users` para registrar novos usuários.
-- **Encurtamento de URL:** Endpoint `POST /urls` que permite que usuários (autenticados ou anônimos) enviem uma URL longa para receber uma versão encurtada.
+- **Cadastro de usuários:** Endpoint `POST /users` para registrar novos usuários.
+- **Encurtamento de URL:** Endpoint `POST /urls` que permite que usuários enviem uma URL longa para receber uma versão encurtada.
 - **Redirecionamento:** Endpoint `GET /:shortCode` que redireciona para a URL original e contabiliza o clique.
 
-**Nota:** As funcionalidades de autenticação (login), listagem, edição e exclusão de URLs por usuário autenticado foram planejadas mas não implementadas devido ao tempo limite do teste. A estrutura de autenticação (decorator `GetUser`) e os relacionamentos no banco de dados estão prontos para recebê-las.
+**Nota:** As funcionalidades de autenticação, listagem, edição e exclusão de URLs por usuário autenticado foram planejadas mas não implementadas. A estrutura de autenticação (decorator `GetUser`) e os relacionamentos no banco de dados estão prontos para recebê-las.
 
-## Tecnologias Utilizadas
+## Tecnologias utilizadas
 
 - **Node.js** (v22)
 - **NestJS** Framework
@@ -35,12 +35,12 @@ Certifique-se de que o Docker esteja em execução na sua máquina.
 1.  **Clone o Repositório**
 
     ```bash
-    git clone <url-do-seu-repositorio>
-    cd <nome-do-repositorio>
+    git clone https://github.com/julietedias/encurtador-url.git
+    cd encurtador-url
     ```
 
-2.  **Configure as Variáveis de Ambiente**
-    Crie uma cópia do arquivo de exemplo `.env.example` e nomeie-a `.env`.
+2.  **Configure as variáveis de ambiente:**
+    Crie uma cópia do arquivo de exemplo `.env.example` e renomeie como `.env`.
 
     ```bash
     cp .env.example .env
@@ -48,7 +48,7 @@ Certifique-se de que o Docker esteja em execução na sua máquina.
 
     _Observação: As variáveis no `.env.example` já estão configuradas para o ambiente Docker. Para produção, o `JWT_SECRET` deve ser alterado._
 
-3.  **Suba os Contêineres**
+3.  **Suba os contêineres:**
     Execute o seguinte comando para construir as imagens e iniciar os serviços em segundo plano:
 
     ```bash
@@ -67,11 +67,19 @@ O projeto utiliza a abordagem **Code-First** com o TypeORM. A estrutura das tabe
 
 Um arquivo `schema.sql` com os comandos `CREATE TABLE` está incluído neste repositório para referência e documentação da estrutura projetada.
 
-### Acessando o Banco
+### Acessando o banco
 
 Você pode acessar o banco de dados PostgreSQL que está rodando no Docker para verificar os registros.
 
-**1. Via Ferramenta Gráfica (DBeaver, DataGrip, etc.)**
+**1. Via linha de comando:**
+Com os contêineres em execução, rode o seguinte comando no seu terminal:
+
+````bash
+docker compose exec db psql -U postgres -d shortener
+````
+Dentro do psql, você pode usar comandos como `\d` para listar tabelas ou `SELECT * FROM users;` para ver os dados. Use `\q` para sair.
+
+**2. Via ferramenta gráfica (DBeaver, por exemplo):**
 Use as seguintes credenciais de conexão:
 
 - **Host:** `localhost`
@@ -80,11 +88,3 @@ Use as seguintes credenciais de conexão:
 - **Senha:** `postgres`
 - **Banco de Dados:** `shortener`
 
-**2. Via Linha de Comando**
-Com o projeto em execução, rode o seguinte comando no seu terminal:
-
-````bash
-docker compose exec db psql -U postgres -d shortener
-Dentro do psql, você pode usar comandos como \d para listar tabelas ou SELECT * FROM users; para ver os dados. Use \q para sair.
-```bash
-````
